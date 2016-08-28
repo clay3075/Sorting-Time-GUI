@@ -1,0 +1,92 @@
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+
+public class Application extends JFrame implements ActionListener {
+	private JPanel     mainPanel = new JPanel();
+	private JPanel     options   = new JPanel();
+	private JTextField numberField = new JTextField();
+	
+	private int[] testArray;
+	
+	public void createRandomTestArray(int size) {
+		testArray = new int[size];
+		Random rand = new Random();
+		
+		for (int i = 0; i < size; i++) 
+			testArray[i] = rand.nextInt();
+	}
+	
+	private void createWindow() {
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
+		setTitle("Sorting Times");
+		JPanel titlePanel = new JPanel(new BorderLayout());
+		JLabel label = new JLabel("Please select the sorts you would like to test.");
+		titlePanel.add(label);
+		mainPanel.add(titlePanel);
+		createSortOptions();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //need this to actually quit application!!!
+		getContentPane().add(mainPanel, BorderLayout.CENTER);
+		setLocationRelativeTo(null);
+		pack();
+		setVisible(true);
+	}
+	
+	private void createSortOptions() {
+		JPanel box = new JPanel();
+		String[] sortingNames = {"Bubble Sort", "Insertion Sort", "Merge Sort", "Quick Sort", "Heap Sort", "Radix Sort"};
+		options.setLayout(new BoxLayout(options, BoxLayout.PAGE_AXIS));
+		for (String name: sortingNames) {
+			options.add(new JCheckBox(name));
+		}
+		box.add(options);
+		JButton startButton = new JButton("Start");
+		startButton.addActionListener(this);
+		JPanel inputBox = new JPanel();
+		inputBox.setLayout(new BoxLayout(inputBox, BoxLayout.PAGE_AXIS));
+		inputBox.add(new JLabel("Enter array size for testing"));
+		inputBox.add(numberField);
+		box.add(inputBox);
+		box.add(startButton);
+		mainPanel.add(box);
+	}
+	
+	public static void main(String[] args) {
+		Application app = new Application();
+		app.createWindow();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		//create array to be used for testing
+		createRandomTestArray(Integer.parseInt(numberField.getText()));
+		numberField.setText("");
+		
+		//will be used to start threads for sorting functions
+		Thread thread = null;
+		//loop through each check box
+		for (Component option: options.getComponents()) {
+			JCheckBox temp = (JCheckBox) option;
+			if (temp.isSelected()) {
+				//add thread to run selected sort in the background
+				if (temp.getText() == "Insertion Sort") 
+					thread = new Thread(new InsertionSort(testArray));
+				
+				thread.start();          //start sorting algorithm
+				temp.setSelected(false); //ready GUI for next use
+			}
+		}
+	}
+}
