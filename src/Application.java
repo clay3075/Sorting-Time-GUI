@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -27,6 +26,7 @@ public class Application extends JFrame implements ActionListener {
 		
 		for (int i = 0; i < size; i++) 
 			testArray[i] = rand.nextInt();
+//		testArray = new int[]{5,4,2,3,6}; //for testing only remove once done
 	}
 	
 	private void createWindow() {
@@ -81,8 +81,24 @@ public class Application extends JFrame implements ActionListener {
 			JCheckBox temp = (JCheckBox) option;
 			if (temp.isSelected()) {
 				//add thread to run selected sort in the background
-				if (temp.getText() == "Insertion Sort") 
-					thread = new Thread(new InsertionSort(testArray));
+				if (temp.getText() == "Insertion Sort")  {
+					int testArray1[] = new int[testArray.length];
+					for (int i = 0; i < testArray.length; i++)
+						testArray1[i] = testArray[i];
+					thread = new Thread(new InsertionSort(testArray1));
+				}
+				else if (temp.getText() == "Bubble Sort") {
+					int testArray2[] = new int[testArray.length];
+					for (int i = 0; i < testArray.length; i++)
+						testArray2[i] = testArray[i];
+					thread = new Thread(new BubbleSort(testArray2));
+				}
+				else if (temp.getText() == "Merge Sort") {
+					int testArray3[] = new int[testArray.length];
+					for (int i = 0; i < testArray.length; i++)
+						testArray3[i] = testArray[i];
+					thread = new Thread(new MergeSort(testArray3));
+				}
 				
 				thread.start();          //start sorting algorithm
 				temp.setSelected(false); //ready GUI for next use
