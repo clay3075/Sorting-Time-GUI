@@ -105,6 +105,12 @@ public class Application extends JFrame implements ActionListener {
 						testArray4[i] = testArray[i];
 					thread = new Thread(new HeapSort(testArray4));
 				}
+				else if (temp.getText() == "Quick Sort") {
+					int testArray5[] = new int[testArray.length];
+					for (int i = 0; i < testArray.length; i++)
+						testArray5[i] = testArray[i];
+					thread = new Thread(new QuickSort(testArray5));
+				}
 				
 				thread.start();          //start sorting algorithm
 				temp.setSelected(false); //ready GUI for next use
