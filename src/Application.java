@@ -99,6 +99,12 @@ public class Application extends JFrame implements ActionListener {
 						testArray3[i] = testArray[i];
 					thread = new Thread(new MergeSort(testArray3));
 				}
+				else if (temp.getText() == "Heap Sort") {
+					int testArray4[] = new int[testArray.length];
+					for (int i = 0; i < testArray.length; i++)
+						testArray4[i] = testArray[i];
+					thread = new Thread(new HeapSort(testArray4));
+				}
 				
 				thread.start();          //start sorting algorithm
 				temp.setSelected(false); //ready GUI for next use
