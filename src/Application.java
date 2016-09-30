@@ -26,7 +26,6 @@ public class Application extends JFrame implements ActionListener {
 		
 		for (int i = 0; i < size; i++) 
 			testArray[i] = rand.nextInt();
-//		testArray = new int[]{5,4,2,3,6}; //for testing only remove once done
 	}
 	
 	private void createWindow() {
@@ -46,7 +45,7 @@ public class Application extends JFrame implements ActionListener {
 	
 	private void createSortOptions() {
 		JPanel box = new JPanel();
-		String[] sortingNames = {"Bubble Sort", "Insertion Sort", "Merge Sort", "Quick Sort", "Heap Sort", "Radix Sort"};
+		String[] sortingNames = {"Bubble Sort", "Insertion Sort", "Merge Sort", "Quick Sort", "Heap Sort"};
 		options.setLayout(new BoxLayout(options, BoxLayout.PAGE_AXIS));
 		for (String name: sortingNames) {
 			options.add(new JCheckBox(name));
