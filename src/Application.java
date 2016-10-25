@@ -16,11 +16,12 @@ import javax.swing.SpinnerNumberModel;
 
 public class Application extends JFrame implements ActionListener {
   private static final long serialVersionUID  = -6990106684439731648L;
+  private static final int  MAX_VALUE         = 1048576;
   private JPanel            mainPanel         = new JPanel();
   private JPanel            options           = new JPanel();
   private JPanel            arrayOptionsPanel = new JPanel();
   private JSpinner          numberField       = new JSpinner(
-    new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1));
+    new SpinnerNumberModel(1, 1, MAX_VALUE, 1));
 
   private int[] testArray;
 
@@ -32,7 +33,7 @@ public class Application extends JFrame implements ActionListener {
     // Iterate through the entire size of the array
     for (int i  = 0; i < size; i++)
       // Assign each element a random integer value
-      testArray[i] = rand.nextInt();
+      testArray[i] = rand.nextInt() % MAX_VALUE;
   }
 
   private void createAscendingTestArray(int size) {
@@ -41,7 +42,7 @@ public class Application extends JFrame implements ActionListener {
     // Iterate through the entire size of the array
     for (int i = 0; i < size; i++)
       // Assign each element to its own index value
-      testArray[i] = i;
+      testArray[i] = i % MAX_VALUE;
   }
 
   private void createDescendingTestArray(int size) {
@@ -50,7 +51,7 @@ public class Application extends JFrame implements ActionListener {
     // Iterate through the entire size of the array
     for (int i = 0; i < size; i++)
       // Assign each element to the difference of size and its own index value
-      testArray[i] = (size - 1) - i;
+      testArray[i] = ((size - 1) - i) % MAX_VALUE;
   }
 
   private void createWindow() {

@@ -28,7 +28,7 @@ public class QuickSort implements Runnable {
       double timeTaken = SortingTimer.getTimeToRun(arr, new Callable<Void>() {
         public Void call() { quickSort(); return null; }
           // Display the timing results of the sorting algorithm
-      }); new DisplayResultsPage(timeTaken, arr.length, "Quick Sort");
+      }); new DisplayResultsPage(timeTaken, arr, "Quick Sort");
     } catch (Exception e) {
       // Print a stack trace if an exception occurs
       e.printStackTrace();

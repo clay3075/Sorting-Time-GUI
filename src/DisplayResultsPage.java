@@ -23,9 +23,9 @@ public class DisplayResultsPage extends JFrame implements ActionListener {
   private String sortName;
   private String exportInfo = "";
 
-  public DisplayResultsPage(double timeToDisplay, int arraySize, String sortName) {
+  public DisplayResultsPage(double timeToDisplay, int[] array, String sortName) {
     this.timeToDisplay = timeToDisplay;
-    this.arrSize       = arraySize;
+    this.arrSize       = array.length;
     this.sortName      = sortName;
     wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.PAGE_AXIS));
 
