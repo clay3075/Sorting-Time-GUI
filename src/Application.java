@@ -165,6 +165,7 @@ public class Application extends JFrame implements ActionListener {
         JRadioButton temp = (JRadioButton)option;
         // Determine if this sorting algorithm is selected
         if (temp.isSelected()) {
+          System.out.println("Copying input array ...");
           // Determine which sorting algorithm this checkbox represents
           if (temp.getText() == "Insertion Sort")  {
             // Create a copy of the original array into a separate storage

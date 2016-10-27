@@ -28,7 +28,7 @@ public class MergeSort implements Runnable {
    * Displays a window with the results of the timed sort.
    */
   public void run() {
-    try {
+    try { System.out.println("Begin sorting ...");
       // Calculate the time required to perform the sorting algorithm
       double timeTaken = SortingTimer.getTimeToRun(arr, new Callable<Void>() {
         public Void call() { mergeSort(); return null; }
