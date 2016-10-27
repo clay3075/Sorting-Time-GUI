@@ -15,11 +15,10 @@ public class QuickSort implements Runnable {
    *
    * @param  arr  An array of integers to test the algorithm with.
    */
-  public QuickSort(int[] arr) {
+  public QuickSort(int[] arr, int[] old) {
     // Assign the internal array reference to the provided parameter
     this.arr = arr;
-    this.old = new int[this.arr.length];
-    System.arraycopy(this.arr, 0, this.old, 0, this.arr.length);
+    this.old = old;
   }
 
   /**

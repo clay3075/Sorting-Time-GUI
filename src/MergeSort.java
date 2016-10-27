@@ -13,13 +13,12 @@ public class MergeSort implements Runnable {
   /**
    * Prepare the sorting algorithm for timed testing.
    *
-   * @param   arr  An array of integers to test the algorithm with.
+   * @param  arr  An array of integers to test the algorithm with.
    */
-  public MergeSort(int[] arr) {
+  public MergeSort(int[] arr, int[] old) {
     // Assign the internal array reference to the provided parameter
     this.arr = arr;
-    this.old = new int[this.arr.length];
-    System.arraycopy(this.arr, 0, this.old, 0, this.arr.length);
+    this.old = old;
   }
 
   /**

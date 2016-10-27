@@ -19,13 +19,12 @@ public class HeapSort implements Runnable {
    *
    * @param  arr  An array of integers to test the algorithm with.
    */
-  public HeapSort(int[] arr) {
+  public HeapSort(int[] arr, int[] old) {
     // Assign the internal array reference to the provided parameter
     this.arr = arr;
+    this.old = old;
     // Store the original size of the input array
     heapSize = arr.length;
-    this.old = new int[this.arr.length];
-    System.arraycopy(this.arr, 0, this.old, 0, this.arr.length);
   }
 
   /**

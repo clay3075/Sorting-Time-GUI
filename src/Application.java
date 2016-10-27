@@ -170,37 +170,47 @@ public class Application extends JFrame implements ActionListener {
             // Create a copy of the original array into a separate storage
             // location for this thread to mutate
             int testArray1[] = new int[testArray.length];
+            int  oldArray1[] = new int[testArray.length];
             System.arraycopy(testArray, 0, testArray1, 0, testArray.length);
+            System.arraycopy(testArray, 0,  oldArray1, 0, testArray.length);
             // Create an instance of Thread representing this sorting algorithm
-            thread = new Thread(new InsertionSort(testArray1));
+            thread = new Thread(new InsertionSort(testArray1, oldArray1));
           } else if (temp.getText() == "Bubble Sort") {
             // Create a copy of the original array into a separate storage
             // location for this thread to mutate
             int testArray2[] = new int[testArray.length];
+            int  oldArray2[] = new int[testArray.length];
             System.arraycopy(testArray, 0, testArray2, 0, testArray.length);
+            System.arraycopy(testArray, 0,  oldArray2, 0, testArray.length);
             // Create an instance of Thread representing this sorting algorithm
-            thread = new Thread(new BubbleSort(testArray2));
+            thread = new Thread(new BubbleSort(testArray2, oldArray2));
           } else if (temp.getText() == "Merge Sort") {
             // Create a copy of the original array into a separate storage
             // location for this thread to mutate
             int testArray3[] = new int[testArray.length];
+            int  oldArray3[] = new int[testArray.length];
             System.arraycopy(testArray, 0, testArray3, 0, testArray.length);
+            System.arraycopy(testArray, 0,  oldArray3, 0, testArray.length);
             // Create an instance of Thread representing this sorting algorithm
-            thread = new Thread(new MergeSort(testArray3));
+            thread = new Thread(new MergeSort(testArray3, oldArray3));
           } else if (temp.getText() == "Heap Sort") {
             // Create a copy of the original array into a separate storage
             // location for this thread to mutate
             int testArray4[] = new int[testArray.length];
+            int  oldArray4[] = new int[testArray.length];
             System.arraycopy(testArray, 0, testArray4, 0, testArray.length);
+            System.arraycopy(testArray, 0,  oldArray4, 0, testArray.length);
             // Create an instance of Thread representing this sorting algorithm
-            thread = new Thread(new HeapSort(testArray4));
+            thread = new Thread(new HeapSort(testArray4, oldArray4));
           } else if (temp.getText() == "Quick Sort") {
             // Create a copy of the original array into a separate storage
             // location for this thread to mutate
             int testArray5[] = new int[testArray.length];
+            int  oldArray5[] = new int[testArray.length];
             System.arraycopy(testArray, 0, testArray5, 0, testArray.length);
+            System.arraycopy(testArray, 0,  oldArray5, 0, testArray.length);
             // Create an instance of Thread representing this sorting algorithm
-            thread = new Thread(new QuickSort(testArray5));
+            thread = new Thread(new QuickSort(testArray5, oldArray5));
           } thread.start(); // Begin sorting on this instance of Thread
         }
       }

@@ -15,11 +15,10 @@ public class InsertionSort implements Runnable {
    *
    * @param  arr  An array of integers to test the algorithm with.
    */
-  public InsertionSort(int[] arr) {
+  public InsertionSort(int[] arr, int[] old) {
     // Assign the internal array reference to the provided parameter
     this.arr = arr;
-    this.old = new int[this.arr.length];
-    System.arraycopy(this.arr, 0, this.old, 0, this.arr.length);
+    this.old = old;
   }
 
   /**
