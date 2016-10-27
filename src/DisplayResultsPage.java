@@ -24,12 +24,10 @@ public class DisplayResultsPage extends JFrame implements ActionListener {
   private int[]  old;
   private String exportInfo = "";
 
-  public DisplayResultsPage(double timeToDisplay, int[] array, int[] old,
+  public DisplayResultsPage(double timeToDisplay, int[] arr, int[] old,
       String sortName) {
-    this.arr = new int[array.length];
-    System.arraycopy(array, 0, this.arr, 0, array.length);
-    this.old = new int[old.length];
-    System.arraycopy(old, 0, this.old, 0, old.length);
+    this.arr = arr;
+    this.old = old;
     this.timeToDisplay = timeToDisplay;
     wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.PAGE_AXIS));
 
