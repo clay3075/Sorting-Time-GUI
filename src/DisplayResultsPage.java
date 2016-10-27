@@ -24,7 +24,7 @@ public class DisplayResultsPage extends JFrame implements ActionListener {
   private int[]  old;
   private String exportInfo = "";
 
-  public DisplayResultsPage(double timeToDisplay, int[] array, int[] old, 
+  public DisplayResultsPage(double timeToDisplay, int[] array, int[] old,
       String sortName) {
     this.arr = new int[array.length];
     System.arraycopy(array, 0, this.arr, 0, array.length);
@@ -71,7 +71,7 @@ public class DisplayResultsPage extends JFrame implements ActionListener {
       } append("", true, false);
     }
   }
-  
+
   private void append(String input, Boolean newline, Boolean display) {
     if (display == true) {
       JLabel label = new JLabel(input);
@@ -79,7 +79,7 @@ public class DisplayResultsPage extends JFrame implements ActionListener {
       resultsPanel.add(label); }
     exportInfo += input + (newline ? "\r\n" : "");
   }
-  
+
   private void createButtons() {
     JButton button = new JButton("Export");
     button.addActionListener(this);
