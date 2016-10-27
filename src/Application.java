@@ -58,12 +58,12 @@ public class Application extends JFrame implements ActionListener {
     mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
     setTitle("Sorting Times");
     JPanel titlePanel = new JPanel(new BorderLayout());
-    JLabel label = new JLabel("Select the sort to test.");
+    JLabel label = new JLabel("Select the sort to test:");
     titlePanel.add(label);
     mainPanel.add(titlePanel);
     createSortOptions();
     JPanel titlePanel2 = new JPanel(new BorderLayout());
-    JLabel label2 = new JLabel("Select which type of array to sort.");
+    JLabel label2 = new JLabel("Select which type of array to sort:");
     titlePanel2.add(label2);
     mainPanel.add(titlePanel2);
     createArrayOptions();
@@ -123,7 +123,8 @@ public class Application extends JFrame implements ActionListener {
     // Create an input box to hold the requested array size
     JPanel inputBox = new JPanel();
     inputBox.setLayout(new BoxLayout(inputBox, BoxLayout.PAGE_AXIS));
-    inputBox.add(new JLabel("Enter array size for testing."));
+    inputBox.add(new JLabel("Enter array size for testing [1, " + 
+      MAX_VALUE + "]:"));
     inputBox.add(numberField);
     // Add the input box and start button to the primary window
     box.add(inputBox);
