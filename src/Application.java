@@ -16,7 +16,7 @@ import javax.swing.SpinnerNumberModel;
 
 public class Application extends JFrame implements ActionListener {
   private static final long serialVersionUID  = -6990106684439731648L;
-  private static final int  MAX_VALUE         = 1048576;
+  private static final int  MAX_VALUE         = 524288;
   private JPanel            mainPanel         = new JPanel();
   private JPanel            options           = new JPanel();
   private JPanel            arrayOptionsPanel = new JPanel();

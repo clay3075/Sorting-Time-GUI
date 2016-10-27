@@ -6,6 +6,10 @@ public class HeapSort implements Runnable {
    */
   private int[] arr;
   /**
+   * @var old The old array before sorting is complete.
+   */
+  private int[] old;
+  /**
    * @var heapSize The size of the array to be sorted.
    */
   private int   heapSize;
@@ -20,6 +24,8 @@ public class HeapSort implements Runnable {
     this.arr = arr;
     // Store the original size of the input array
     heapSize = arr.length;
+    this.old = new int[this.arr.length];
+    System.arraycopy(this.arr, 0, this.old, 0, this.arr.length);
   }
 
   /**
@@ -34,7 +40,7 @@ public class HeapSort implements Runnable {
       double timeTaken = SortingTimer.getTimeToRun(arr, new Callable<Void>() {
         public Void call() { heapSort(); return null; }
           // Display the timing results of the sorting algorithm
-      }); new DisplayResultsPage(timeTaken, arr, "Heap Sort");
+      }); new DisplayResultsPage(timeTaken, arr, old, "Heap Sort");
     } catch (Exception e) {
       // Print a stack trace if an exception occurs
       e.printStackTrace();

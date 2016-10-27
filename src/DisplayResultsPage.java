@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,14 +20,17 @@ public class DisplayResultsPage extends JFrame implements ActionListener {
   private JPanel buttonsPanel = new JPanel();
 
   private double timeToDisplay;
-  private int    arrSize;
-  private String sortName;
+  private int[]  arr;
+  private int[]  old;
   private String exportInfo = "";
 
-  public DisplayResultsPage(double timeToDisplay, int[] array, String sortName) {
+  public DisplayResultsPage(double timeToDisplay, int[] array, int[] old, 
+      String sortName) {
+    this.arr = new int[array.length];
+    System.arraycopy(array, 0, this.arr, 0, array.length);
+    this.old = new int[old.length];
+    System.arraycopy(old, 0, this.old, 0, old.length);
     this.timeToDisplay = timeToDisplay;
-    this.arrSize       = array.length;
-    this.sortName      = sortName;
     wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.PAGE_AXIS));
 
     mainPanel.setLayout(new GridBagLayout());
@@ -38,32 +42,44 @@ public class DisplayResultsPage extends JFrame implements ActionListener {
     createButtons();
 
     mainPanel.add(wrapper);
-    getContentPane().add(mainPanel, BorderLayout.CENTER); //add the content to the main window
+    // add the content to the main window
+    getContentPane().add(mainPanel, BorderLayout.CENTER);
     setLocationRelativeTo(null);
     pack();           //pack all elements to the screen
     setVisible(true); //show window to screen
   }
 
   private void createResultsDisplay() {
-    double mil = timeToDisplay;
-    double sec = mil / 1000;
-
     resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.PAGE_AXIS));
 
-    resultsPanel.add(new JLabel(sortName + " Results"));
-    exportInfo += "Results\n";
-    resultsPanel.add(new JLabel("--------------"));
-    exportInfo += "--------------\n";
-    resultsPanel.add(new JLabel("Array Size:     " + arrSize));
-    exportInfo += "Array Size:     " + arrSize + "\n";
-    resultsPanel.add(new JLabel("Milliseconds:   " + mil + "ms"));
-    exportInfo += "Milliseconds: " + mil + "ms\n";
-    resultsPanel.add(new JLabel("Seconds:        " + sec + "s"));
-    exportInfo += "Seconds:        " + sec + "s\n";
+    append("Array Size:   " + this.arr.length, true, true);
+    append("Milliseconds: " + timeToDisplay + " ms", true, true);
+    append("Input:", true, false);
+    appendArray(this.old);
+    append("Result:", true, false);
+    appendArray(this.arr);
 
     wrapper.add(resultsPanel);
   }
 
+  private void appendArray(int[] array) {
+    final int elementsPerLine = 8;
+    for (int i = 0; i < array.length; i += elementsPerLine) {
+      for (int j = 0; j < elementsPerLine && i + j < array.length; ++j) {
+        String number = Integer.toString(array[i + j]);
+        append(String.format("%8.8s ", number), false, false);
+      } append("", true, false);
+    }
+  }
+  
+  private void append(String input, Boolean newline, Boolean display) {
+    if (display == true) {
+      JLabel label = new JLabel(input);
+      label.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+      resultsPanel.add(label); }
+    exportInfo += input + (newline ? "\r\n" : "");
+  }
+  
   private void createButtons() {
     JButton button = new JButton("Export");
     button.addActionListener(this);

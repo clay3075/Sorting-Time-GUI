@@ -5,6 +5,10 @@ public class BubbleSort implements Runnable {
    * @var arr The array of integers to test the algorithm with.
    */
   private int[] arr;
+  /**
+   * @var old The old array before sorting is complete.
+   */
+  private int[] old;
 
   /**
    * Prepare the sorting algorithm for timed testing.
@@ -14,6 +18,8 @@ public class BubbleSort implements Runnable {
   public BubbleSort(int[] arr) {
     // Assign the internal array reference to the provided parameter
     this.arr = arr;
+    this.old = new int[this.arr.length];
+    System.arraycopy(this.arr, 0, this.old, 0, this.arr.length);
   }
 
   /**
@@ -28,7 +34,7 @@ public class BubbleSort implements Runnable {
       double timeTaken = SortingTimer.getTimeToRun(arr, new Callable<Void>() {
         public Void call() { bubbleSort(); return null; }
           // Display the timing results of the sorting algorithm
-      }); new DisplayResultsPage(timeTaken, arr, "Bubble Sort");
+      }); new DisplayResultsPage(timeTaken, arr, old, "Bubble Sort");
     } catch (Exception e) {
       // Print a stack trace if an exception occurs
       e.printStackTrace();
