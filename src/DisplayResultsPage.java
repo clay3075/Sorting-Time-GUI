@@ -36,6 +36,7 @@ public class DisplayResultsPage extends JFrame implements ActionListener {
     setPreferredSize(new Dimension(300, 200));
 
     //create display information
+    System.out.println("Preparing export information for " + sortName + " ...");
     createResultsDisplay();
     createButtons();
 
