@@ -10,6 +10,10 @@ public class HeapSort implements Runnable {
    */
   private int[] old;
   /**
+   * @var arrayOption The name of the type of input array.
+   */
+  private String arrayOption;
+  /**
    * @var heapSize The size of the array to be sorted.
    */
   private int   heapSize;
@@ -19,10 +23,11 @@ public class HeapSort implements Runnable {
    *
    * @param  arr  An array of integers to test the algorithm with.
    */
-  public HeapSort(int[] arr, int[] old) {
+  public HeapSort(String arrayOption, int[] arr, int[] old) {
     // Assign the internal array reference to the provided parameter
     this.arr = arr;
     this.old = old;
+    this.arrayOption = arrayOption;
     // Store the original size of the input array
     heapSize = arr.length;
   }
@@ -39,7 +44,8 @@ public class HeapSort implements Runnable {
       double timeTaken = SortingTimer.getTimeToRun(arr, new Callable<Void>() {
         public Void call() { heapSort(); return null; }
           // Display the timing results of the sorting algorithm
-      }); new DisplayResultsPage(timeTaken, arr, old, "Heap Sort");
+      }); new DisplayResultsPage(timeTaken, arr, old, "Heap Sort (" +
+        this.arrayOption + ")");
     } catch (Exception e) {
       // Print a stack trace if an exception occurs
       e.printStackTrace();

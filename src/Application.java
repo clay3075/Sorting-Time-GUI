@@ -175,7 +175,8 @@ public class Application extends JFrame implements ActionListener {
             System.arraycopy(testArray, 0, testArray1, 0, testArray.length);
             System.arraycopy(testArray, 0,  oldArray1, 0, testArray.length);
             // Create an instance of Thread representing this sorting algorithm
-            thread = new Thread(new InsertionSort(testArray1, oldArray1));
+            thread = new Thread(new InsertionSort(arrayOption, testArray1,
+              oldArray1));
           } else if (temp.getText() == "Bubble Sort") {
             // Create a copy of the original array into a separate storage
             // location for this thread to mutate
@@ -184,7 +185,8 @@ public class Application extends JFrame implements ActionListener {
             System.arraycopy(testArray, 0, testArray2, 0, testArray.length);
             System.arraycopy(testArray, 0,  oldArray2, 0, testArray.length);
             // Create an instance of Thread representing this sorting algorithm
-            thread = new Thread(new BubbleSort(testArray2, oldArray2));
+            thread = new Thread(new BubbleSort(arrayOption, testArray2,
+              oldArray2));
           } else if (temp.getText() == "Merge Sort") {
             // Create a copy of the original array into a separate storage
             // location for this thread to mutate
@@ -193,7 +195,8 @@ public class Application extends JFrame implements ActionListener {
             System.arraycopy(testArray, 0, testArray3, 0, testArray.length);
             System.arraycopy(testArray, 0,  oldArray3, 0, testArray.length);
             // Create an instance of Thread representing this sorting algorithm
-            thread = new Thread(new MergeSort(testArray3, oldArray3));
+            thread = new Thread(new MergeSort(arrayOption, testArray3,
+              oldArray3));
           } else if (temp.getText() == "Heap Sort") {
             // Create a copy of the original array into a separate storage
             // location for this thread to mutate
@@ -202,7 +205,8 @@ public class Application extends JFrame implements ActionListener {
             System.arraycopy(testArray, 0, testArray4, 0, testArray.length);
             System.arraycopy(testArray, 0,  oldArray4, 0, testArray.length);
             // Create an instance of Thread representing this sorting algorithm
-            thread = new Thread(new HeapSort(testArray4, oldArray4));
+            thread = new Thread(new HeapSort(arrayOption, testArray4,
+              oldArray4));
           } else if (temp.getText() == "Quick Sort") {
             // Create a copy of the original array into a separate storage
             // location for this thread to mutate
@@ -211,7 +215,8 @@ public class Application extends JFrame implements ActionListener {
             System.arraycopy(testArray, 0, testArray5, 0, testArray.length);
             System.arraycopy(testArray, 0,  oldArray5, 0, testArray.length);
             // Create an instance of Thread representing this sorting algorithm
-            thread = new Thread(new QuickSort(testArray5, oldArray5));
+            thread = new Thread(new QuickSort(arrayOption, testArray5,
+              oldArray5));
           } thread.start(); // Begin sorting on this instance of Thread
         }
       }

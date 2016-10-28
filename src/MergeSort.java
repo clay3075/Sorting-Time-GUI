@@ -9,16 +9,21 @@ public class MergeSort implements Runnable {
    * @var old The old array before sorting is complete.
    */
   private int[] old;
+  /**
+   * @var arrayOption The name of the type of input array.
+   */
+  private String arrayOption;
 
   /**
    * Prepare the sorting algorithm for timed testing.
    *
    * @param  arr  An array of integers to test the algorithm with.
    */
-  public MergeSort(int[] arr, int[] old) {
+  public MergeSort(String arrayOption, int[] arr, int[] old) {
     // Assign the internal array reference to the provided parameter
     this.arr = arr;
     this.old = old;
+    this.arrayOption = arrayOption;
   }
 
   /**
@@ -33,7 +38,8 @@ public class MergeSort implements Runnable {
       double timeTaken = SortingTimer.getTimeToRun(arr, new Callable<Void>() {
         public Void call() { mergeSort(); return null; }
           // Display the timing results of the sorting algorithm
-      }); new DisplayResultsPage(timeTaken, arr, old, "Merge Sort");
+      }); new DisplayResultsPage(timeTaken, arr, old, "Merge Sort (" +
+        this.arrayOption + ")");
     } catch (Exception e) {
       // Print a stack trace if an exception occurs
       e.printStackTrace();
