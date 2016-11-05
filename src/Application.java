@@ -101,7 +101,7 @@ public class Application extends JFrame implements ActionListener {
     JPanel box = new JPanel();
     // Create a list of checkboxes to be added to the application window
     String[] sortingNames = { "Bubble Sort", "Insertion Sort", "Merge Sort",
-      "Quick Sort", "Heap Sort" };
+      "End Quick Sort", "Random Quick Sort", "Heap Sort" };
     options.setLayout(new BoxLayout(options, BoxLayout.PAGE_AXIS));
     // Create a group for the buttons to logically associate with
     ButtonGroup grp = new ButtonGroup();
@@ -207,7 +207,7 @@ public class Application extends JFrame implements ActionListener {
             // Create an instance of Thread representing this sorting algorithm
             thread = new Thread(new HeapSort(arrayOption, testArray4,
               oldArray4));
-          } else if (temp.getText() == "Quick Sort") {
+          } else if (temp.getText() == "End Quick Sort") {
             // Create a copy of the original array into a separate storage
             // location for this thread to mutate
             int testArray5[] = new int[testArray.length];
@@ -215,8 +215,18 @@ public class Application extends JFrame implements ActionListener {
             System.arraycopy(testArray, 0, testArray5, 0, testArray.length);
             System.arraycopy(testArray, 0,  oldArray5, 0, testArray.length);
             // Create an instance of Thread representing this sorting algorithm
-            thread = new Thread(new QuickSort(arrayOption, testArray5,
+            thread = new Thread(new EndQuickSort(arrayOption, testArray5,
               oldArray5));
+          } else if (temp.getText() == "Random Quick Sort") {
+            // Create a copy of the original array into a separate storage
+            // location for this thread to mutate
+            int testArray6[] = new int[testArray.length];
+            int  oldArray6[] = new int[testArray.length];
+            System.arraycopy(testArray, 0, testArray6, 0, testArray.length);
+            System.arraycopy(testArray, 0,  oldArray6, 0, testArray.length);
+            // Create an instance of Thread representing this sorting algorithm
+            thread = new Thread(new RandomQuickSort(arrayOption, testArray6,
+              oldArray6));
           } thread.start(); // Begin sorting on this instance of Thread
         }
       }

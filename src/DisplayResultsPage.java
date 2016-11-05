@@ -54,7 +54,7 @@ public class DisplayResultsPage extends JFrame implements ActionListener {
     resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.PAGE_AXIS));
 
     append("Array Size:   " + this.arr.length, true, true);
-    append("Milliseconds: " + String.format("%.8f", timeToDisplay) + " ms", 
+    append("Milliseconds: " + String.format("%.8f", timeToDisplay) + " ms",
       true, true);
     append("Comparisons:  " + comparisons, true, true);
     append("Input:", true, false);

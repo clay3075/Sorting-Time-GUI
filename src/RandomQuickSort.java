@@ -1,6 +1,7 @@
 import java.util.concurrent.Callable;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class QuickSort implements Runnable {
+public class RandomQuickSort implements Runnable {
   /**
    * @var arr The array of integers to test the algorithm with.
    */
@@ -23,7 +24,7 @@ public class QuickSort implements Runnable {
    *
    * @param  arr  An array of integers to test the algorithm with.
    */
-  public QuickSort(String arrayOption, int[] arr, int[] old) {
+  public RandomQuickSort(String arrayOption, int[] arr, int[] old) {
     // Assign the internal array reference to the provided parameter
     this.arr = arr;
     this.old = old;
@@ -102,7 +103,7 @@ public class QuickSort implements Runnable {
    */
   private int partition(int start, int end) {
     // Select the middle index of the provided range as the pivot
-    int pivotIndex = (start + end) / 2;
+    int pivotIndex = ThreadLocalRandom.current().nextInt(start, end + 1);
     int pivotValue = arr[pivotIndex];
     // Swap the pivot value with the range's end value
     swap(pivotIndex, end);
