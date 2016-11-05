@@ -23,12 +23,14 @@ public class DisplayResultsPage extends JFrame implements ActionListener {
   private int[]  arr;
   private int[]  old;
   private String exportInfo = "";
+  private int comparisons = 0;
 
-  public DisplayResultsPage(double timeToDisplay, int[] arr, int[] old,
-      String sortName) {
+  public DisplayResultsPage(double timeToDisplay, int comparisons, int[] arr,
+      int[] old, String sortName) {
     this.arr = arr;
     this.old = old;
     this.timeToDisplay = timeToDisplay;
+    this.comparisons    = comparisons;
     wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.PAGE_AXIS));
 
     mainPanel.setLayout(new GridBagLayout());
@@ -53,6 +55,7 @@ public class DisplayResultsPage extends JFrame implements ActionListener {
 
     append("Array Size:   " + this.arr.length, true, true);
     append("Milliseconds: " + timeToDisplay + " ms", true, true);
+    append("Comparisons:  " + comparisons, true, true);
     append("Input:", true, false);
     appendArray(this.old);
     append("Result:", true, false);
