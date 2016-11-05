@@ -48,7 +48,7 @@ public class HeapSort implements Runnable {
       double timeTaken = SortingTimer.getTimeToRun(arr, new Callable<Void>() {
         public Void call() { heapSort(); return null; }
           // Display the timing results of the sorting algorithm
-      }); new DisplayResultsPage(timeTaken, comparisons, arr, old, 
+      }); new DisplayResultsPage(timeTaken, comparisons, arr, old,
           "Heap Sort (" + this.arrayOption + ")");
     } catch (Exception e) {
       // Print a stack trace if an exception occurs
