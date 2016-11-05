@@ -13,6 +13,10 @@ public class MergeSort implements Runnable {
    * @var arrayOption The name of the type of input array.
    */
   private String arrayOption;
+  /**
+   * @var comparisons The number of comparisons required for the sort.
+   */
+  private int    comparisons = 0;
 
   /**
    * Prepare the sorting algorithm for timed testing.
@@ -38,8 +42,8 @@ public class MergeSort implements Runnable {
       double timeTaken = SortingTimer.getTimeToRun(arr, new Callable<Void>() {
         public Void call() { mergeSort(); return null; }
           // Display the timing results of the sorting algorithm
-      }); new DisplayResultsPage(timeTaken, arr, old, "Merge Sort (" +
-        this.arrayOption + ")");
+      }); new DisplayResultsPage(timeTaken, comparisons, arr, old,
+          "Merge Sort (" + this.arrayOption + ")");
     } catch (Exception e) {
       // Print a stack trace if an exception occurs
       e.printStackTrace();
@@ -61,7 +65,7 @@ public class MergeSort implements Runnable {
    * @param  e  The ending index of the subarray.
    */
   private void mergeSort(int s, int e) {
-    if (s < e) {
+    if (s < e) { ++comparisons;
       int m = (s + e) / 2;
       // Split the input array into two subarrays
       mergeSort(s, m);
@@ -88,19 +92,19 @@ public class MergeSort implements Runnable {
     int t2[] = new int[l2];
 
     // Copy the subarrays into their respective temporary arrays
-    for (int i = 0; i < l1; i++)
-      t1[i] = arr[s + i];
-    for (int i = 0; i < l2; i++)
-      t2[i] = arr[m + 1 + i];
+    for (int i = 0; i < l1; i++) { ++comparisons;
+      t1[i] = arr[s + i]; }
+    for (int i = 0; i < l2; i++) { ++comparisons;
+      t2[i] = arr[m + 1 + i]; }
 
     int i = 0;
     int j = 0;
     int k = s;
     // Walk through the two subarrays and place the appropriate elements into
     // the original array in sorted order until there is a size mismatch
-    while (i < l1 && j < l2) {
+    while (i < l1 && j < l2) { comparisons += 2;
       // If the first temporary array contains the smaller element ...
-      if (t1[i] <= t2[j]) {
+      if (t1[i] <= t2[j]) { ++comparisons;
         // Place it into the original array and increment the temporary's index
         arr[k] = t1[i]; i++;
       } else {
@@ -112,10 +116,10 @@ public class MergeSort implements Runnable {
 
     // Place the remaining elements in the first temporary array into the
     // original array (size mismatch accommodation)
-    while (i < l1) { arr[k] = t1[i]; i++; k++; }
+    while (i < l1) { ++comparisons; arr[k] = t1[i]; i++; k++; }
 
     // Place the remaining elements in the first temporary array into the
     // original array (size mismatch accommodation)
-    while (j < l2) { arr[k] = t2[j]; j++; k++; }
+    while (j < l2) { ++comparisons; arr[k] = t2[j]; j++; k++; }
   }
 }

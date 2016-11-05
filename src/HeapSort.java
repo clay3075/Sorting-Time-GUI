@@ -14,9 +14,13 @@ public class HeapSort implements Runnable {
    */
   private String arrayOption;
   /**
+   * @var comparisons The number of comparisons required for the sort.
+   */
+  private int    comparisons = 0;
+  /**
    * @var heapSize The size of the array to be sorted.
    */
-  private int   heapSize;
+  private int    heapSize;
 
   /**
    * Prepare the sorting algorithm for timed testing.
@@ -44,8 +48,8 @@ public class HeapSort implements Runnable {
       double timeTaken = SortingTimer.getTimeToRun(arr, new Callable<Void>() {
         public Void call() { heapSort(); return null; }
           // Display the timing results of the sorting algorithm
-      }); new DisplayResultsPage(timeTaken, arr, old, "Heap Sort (" +
-        this.arrayOption + ")");
+      }); new DisplayResultsPage(timeTaken, comparisons, arr, old,
+          "Heap Sort (" + this.arrayOption + ")");
     } catch (Exception e) {
       // Print a stack trace if an exception occurs
       e.printStackTrace();
@@ -59,7 +63,7 @@ public class HeapSort implements Runnable {
     // Make a heap out of the provided array
     makeHeap();
     // For each item in the array ...
-    while (heapSize - 1 > 0) {
+    while (heapSize - 1 > 0) { ++comparisons;
       // Swap the first and last elements of the heap
       swap(0, heapSize - 1);
       // Reduce the heap size
@@ -114,7 +118,7 @@ public class HeapSort implements Runnable {
    */
   private void makeHeap() {
     // Heapify from the middle array item to the root of the tree
-    for (int i = heapSize / 2; i >= 0; --i) heapify(i);
+    for (int i = heapSize / 2; i >= 0; --i) { ++comparisons; heapify(i); }
   }
 
   /**
@@ -130,15 +134,15 @@ public class HeapSort implements Runnable {
     // Assume that the left index is greatest
     int greater = left;
     // Check if the left index is less than the heap size
-    if (left < heapSize) {
+    if (left < heapSize) { ++comparisons;
       // Check if the left index is less than the heap size
-      if (right < heapSize) {
+      if (right < heapSize) { ++comparisons;
         // Check if the right value is greater than the left value
-        if (arr[right] > arr[greater])
+        if (arr[right] > arr[greater]) { ++comparisons;
           // Assign the right index to the greater index placeholder
-          greater = right;
+          greater = right; }
       } // Determine if the max child is larger than its parent
-      if (arr[greater] > arr[index]) {
+      if (arr[greater] > arr[index]) { ++comparisons;
         // Swap the parent and max child
         swap(greater, index);
         // Re-heapify at the index of the max child's old position

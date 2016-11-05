@@ -13,6 +13,10 @@ public class InsertionSort implements Runnable {
    * @var arrayOption The name of the type of input array.
    */
   private String arrayOption;
+  /**
+   * @var comparisons The number of comparisons required for the sort.
+   */
+  private int    comparisons = 0;
 
   /**
    * Prepare the sorting algorithm for timed testing.
@@ -38,8 +42,8 @@ public class InsertionSort implements Runnable {
       double timeTaken = SortingTimer.getTimeToRun(arr, new Callable<Void>() {
         public Void call() { insertionSort(); return null; }
           // Display the timing results of the sorting algorithm
-      }); new DisplayResultsPage(timeTaken, arr, old, "Insertion Sort (" +
-        this.arrayOption + ")");
+      }); new DisplayResultsPage(timeTaken, comparisons, arr, old,
+          "Insertion Sort (" + this.arrayOption + ")");
     } catch (Exception e) {
       // Print a stack trace if an exception occurs
       e.printStackTrace();
@@ -51,10 +55,10 @@ public class InsertionSort implements Runnable {
    */
   public void insertionSort() {
     // Iterate over each element in the array from the second index
-    for (int i = 1; i < arr.length; i++) {
+    for (int i = 1; i < arr.length; i++) { ++comparisons;
       // Find the maximum element in the subarray [j,i] and swap the max to the
       // ending position
-      for (int j = i; j > 0 && arr[j - 1] > arr[j]; --j) {
+      for (int j = i; j > 0 && arr[j - 1] > arr[j]; --j) { comparisons += 2;
         int temp   = arr[j];
         arr[j]     = arr[j - 1];
         arr[j - 1] = temp;

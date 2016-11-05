@@ -13,6 +13,10 @@ public class BubbleSort implements Runnable {
    * @var arrayOption The name of the type of input array.
    */
   private String arrayOption;
+  /**
+   * @var comparisons The number of comparisons required for the sort.
+   */
+  private int    comparisons = 0;
 
   /**
    * Prepare the sorting algorithm for timed testing.
@@ -38,8 +42,8 @@ public class BubbleSort implements Runnable {
       double timeTaken = SortingTimer.getTimeToRun(arr, new Callable<Void>() {
         public Void call() { bubbleSort(); return null; }
           // Display the timing results of the sorting algorithm
-      }); new DisplayResultsPage(timeTaken, arr, old, "Bubble Sort (" +
-        this.arrayOption + ")");
+      }); new DisplayResultsPage(timeTaken, comparisons, arr, old,
+          "Bubble Sort (" + this.arrayOption + ")");
     } catch (Exception e) {
       // Print a stack trace if an exception occurs
       e.printStackTrace();
@@ -53,20 +57,20 @@ public class BubbleSort implements Runnable {
     // Create a variable to keep track of whether we're done sorting
     boolean done = false;
     // Loop over the length of the array unless done sorting
-    for (int i = 0; i < this.arr.length && !done; i++) {
+    for (int i = 0; i < this.arr.length && !done; i++) { ++comparisons;
       // Assume that sorting is complete for this run
       done = true;
       // Iterate from the next index of `i` to the end of the array
-      for (int j = i + 1; j < this.arr.length; j++)
+      for (int j = i + 1; j < this.arr.length; j++) { ++comparisons;
         // Determine if we should swap the current element
-        if (this.arr[i] > this.arr[j]) {
+        if (this.arr[i] > this.arr[j]) { ++comparisons;
           // Perform the swap using a temporary variable
           int temp = this.arr[i];
           this.arr[i] = this.arr[j];
           this.arr[j] = temp;
           // Mark done as false since we swapped an item
           done = false;
-        }
+        } }
     }
   }
 }

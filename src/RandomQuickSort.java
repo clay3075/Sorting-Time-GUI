@@ -1,6 +1,7 @@
 import java.util.concurrent.Callable;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class QuickSort implements Runnable {
+public class RandomQuickSort implements Runnable {
   /**
    * @var arr The array of integers to test the algorithm with.
    */
@@ -13,13 +14,17 @@ public class QuickSort implements Runnable {
    * @var arrayOption The name of the type of input array.
    */
   private String arrayOption;
+  /**
+   * @var comparisons The number of comparisons required for the sort.
+   */
+  private int    comparisons = 0;
 
   /**
    * Prepare the sorting algorithm for timed testing.
    *
    * @param  arr  An array of integers to test the algorithm with.
    */
-  public QuickSort(String arrayOption, int[] arr, int[] old) {
+  public RandomQuickSort(String arrayOption, int[] arr, int[] old) {
     // Assign the internal array reference to the provided parameter
     this.arr = arr;
     this.old = old;
@@ -38,8 +43,8 @@ public class QuickSort implements Runnable {
       double timeTaken = SortingTimer.getTimeToRun(arr, new Callable<Void>() {
         public Void call() { quickSort(); return null; }
           // Display the timing results of the sorting algorithm
-      }); new DisplayResultsPage(timeTaken, arr, old, "Quick Sort (" +
-        this.arrayOption + ")");
+      }); new DisplayResultsPage(timeTaken, comparisons, arr, old,
+          "Quick Sort (" + this.arrayOption + ")");
     } catch (Exception e) {
       // Print a stack trace if an exception occurs
       e.printStackTrace();
@@ -62,7 +67,7 @@ public class QuickSort implements Runnable {
    */
   private void quickSort(int start, int end) {
     // Check that the starting index is larger than the ending index
-    if (start < end) {
+    if (start < end) { ++comparisons;
       // Partition the input array on the given range
       int index = partition(start, end);
       // Perform quick sort on the two partitions
@@ -98,17 +103,17 @@ public class QuickSort implements Runnable {
    */
   private int partition(int start, int end) {
     // Select the middle index of the provided range as the pivot
-    int pivotIndex = (start + end) / 2;
+    int pivotIndex = ThreadLocalRandom.current().nextInt(start, end + 1);
     int pivotValue = arr[pivotIndex];
     // Swap the pivot value with the range's end value
     swap(pivotIndex, end);
     // Set the pivot index to the start of the range
     pivotIndex = start;
     // Iterate over the provided range
-    for (int i = start; i < end; i++)
+    for (int i = start; i < end; i++) { ++comparisons;
       // If the current value is less than the pivot value, move it to the left
       // of the pivot index
-      if (arr[i] < pivotValue) swap(i, pivotIndex++);
+      if (arr[i] < pivotValue) { ++comparisons; swap(i, pivotIndex++); } }
     // Move the original pivot value to the resulting pivot index
     swap(pivotIndex, end);
     // Return the resulting pivot index
